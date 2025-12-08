@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "id": "keycloak",
+      "title": "Keycloak",
+      "description": "Open Source Identity and Access Management.",
+      "icon": "https://www.keycloak.org/resources/images/keycloak_logo_200px.png",
+      "filename": "Apps/keycloak.json"
+    },
+    {
+      "id": "postgres",
+      "title": "PostgreSQL",
+      "description": "Reliable relational database for Keycloak.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg",
+      "filename": "Apps/postgres.json"
+    },
+    {
+      "id": "samba-ad-dc",
+      "title": "Samba AD DC",
+      "description": "Windows-native Kerberos and LDAP domain controller.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samba_logo.svg",
+      "filename": "Apps/samba-ad-dc.json"
+    }
+  ]
+}
