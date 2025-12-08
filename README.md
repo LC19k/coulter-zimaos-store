@@ -2,6 +2,19 @@
 
 Custom App Store for ZimaOS, focused on household identity and infrastructure apps.
 
+## 🛒 Store Setup in ZimaOS
+To add this custom store to ZimaOS:
+1. Open **ZimaOS → App Store → Manage Stores → Add Store**.
+2. Paste the following archive link:
+   https://github.com/LC19k/coulter-zimaos-store/archive/refs/heads/main.zip
+> ⚠️ Important: ZimaOS requires the **archive ZIP link** for the branch, not the plain repo URL.
+3. ZimaOS will download the archive, unpack it, and read `index.json` at the root.
+4. The apps (Keycloak, PostgreSQL, Samba AD DC) will appear in the App Store with their icons, categories, and descriptions.
+5. Click **Install** to deploy with household‑safe defaults.
+
+### 🔧 Notes
+- If you change the default branch (e.g., `develop` → `main`), update the archive link accordingly:
+
 ## 📦 Included Apps
 - **Keycloak** (SSO and federation)
 - **Samba AD DC** (Windows-native Kerberos/LDAP domain controller)
