@@ -11,9 +11,9 @@ To add this custom store to ZimaOS:
 3. ZimaOS will download the archive, unpack it, and read `index.json` at the root.
 4. The apps (Keycloak, PostgreSQL, Samba AD DC) will appear in the App Store with their icons, categories, and descriptions.
 5. Click **Install** to deploy with household‑safe defaults.
-
 ### 🔧 Notes
 - If you change the default branch (e.g., `develop` → `main`), update the archive link accordingly:
+  https://github.com/<user>/<repo>/archive/refs/heads/<branch>.zip
 
 ## 📦 Included Apps
 - **Keycloak** (SSO and federation)
