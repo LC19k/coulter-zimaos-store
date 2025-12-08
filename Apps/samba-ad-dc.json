@@ -20,18 +20,20 @@
   ],
   "networks": [
     {
-      "name": "backend-net",
-      "driver": "ipvlan",
+      "name": "Backend",
+      "driver": "macvlan",
       "subnet": "10.0.83.0/24",
       "gateway": "10.0.83.1",
-      "parent": "br0.83"
+      "parent": "br0.83",
+      "mac_address": "52:42:00:02:83:03"
     },
     {
-      "name": "frontend-net",
-      "driver": "ipvlan",
-      "subnet": "10.0.0.0/22",
+      "name": "Infrastructure",
+      "driver": "macvlan",
+      "subnet": "10.0.0.0/24",
       "gateway": "10.0.0.1",
-      "parent": "br0"
+      "parent": "br0",
+      "mac_address": "52:42:00:02:01:03"
     }
   ],
   "restart_policy": "always",
