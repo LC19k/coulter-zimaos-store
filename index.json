@@ -4,8 +4,8 @@
       "id": "keycloak",
       "title": "Keycloak",
       "description": "Open Source Identity and Access Management.",
-      "icon": "https://www.keycloak.org/resources/images/keycloak_logo_200px.png",
-      "filename": "Apps/keycloak.json",
+      "icon": "Apps/keycloak/icon.png",
+      "filename": "Apps/keycloak/docker-compose.yml",
       "categories": ["Identity", "Security"],
       "version": "1.0.0",
       "maintainer": "Lawrence Household"
@@ -13,21 +13,21 @@
     {
       "id": "postgres",
       "title": "PostgreSQL",
-      "description": "Reliable relational database for Keycloak.",
-      "icon": "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg",
-      "filename": "Apps/postgres.json",
-      "categories": ["Database", "Backend"],
-      "version": "1.0.0",
+      "description": "Powerful open source relational database.",
+      "icon": "Apps/postgres/icon.png",
+      "filename": "Apps/postgres/docker-compose.yml",
+      "categories": ["Database"],
+      "version": "15.0",
       "maintainer": "Lawrence Household"
     },
     {
       "id": "samba-ad-dc",
       "title": "Samba AD DC",
-      "description": "Windows-native Kerberos and LDAP domain controller.",
-      "icon": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samba_logo.svg",
-      "filename": "Apps/samba-ad-dc.json",
-      "categories": ["Identity", "Directory"],
-      "version": "1.0.0",
+      "description": "Active Directory Domain Controller with Samba.",
+      "icon": "Apps/samba-ad-dc/icon.png",
+      "filename": "Apps/samba-ad-dc/docker-compose.yml",
+      "categories": ["Identity", "Networking"],
+      "version": "4.20.0",
       "maintainer": "Lawrence Household"
     }
   ]
