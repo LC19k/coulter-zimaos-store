@@ -10,10 +10,8 @@ services:
     volumes:
       - /etc:/etc
       - /var:/var
-    env_file:
-      - ./.env
     environment:
-      - TZ=${TZ}
+      TZ: America/New_York   # inlined instead of env_file
     networks:
       backend:
         mac_address: 52:54:00:01:83:01   # Backend VLAN, slot 1
