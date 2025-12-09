@@ -1,4 +1,4 @@
-name: samba-ad-dc
+name: samba-ad-dc-coulter
 services:
   samba:
     image: ghcr.io/crazy-max/samba:0.19.0
@@ -6,22 +6,24 @@ services:
     restart: unless-stopped
     environment:
       - TZ=${TZ}
-      - SAMBA_SERVER_ROLE=ad-dc
-      - SAMBA_DOMAIN=HOUSEHOLD
-      - SAMBA_REALM=HOUSEHOLD.LAN
-      - SAMBA_ADMIN_PASSWORD=ChangeMeNow_42
-      - SAMBA_NETBIOS_NAME=DC1
-      - SAMBA_WORKGROUP=HOUSEHOLD
+      - SAMBA_SERVER_ROLE=${SAMBA_SERVER_ROLE}
+      - SAMBA_DOMAIN=${SAMBA_DOMAIN}
+      - SAMBA_REALM=${SAMBA_REALM}
+      - SAMBA_ADMIN_PASSWORD=${SAMBA_ADMIN_PASSWORD}
+      - SAMBA_NETBIOS_NAME=${SAMBA_NETBIOS_NAME}
+      - SAMBA_WORKGROUP=${SAMBA_WORKGROUP}
     volumes:
       - /DATA/AppData/samba-ad-dc/etc:/etc/samba
       - /DATA/AppData/samba-ad-dc/data:/var/lib/samba
       - /DATA/AppData/samba-ad-dc/state:/var/cache/samba
       - /DATA/AppData/samba-ad-dc/log:/var/log/samba
+    env_file:
+      - ./.env
     networks:
       backend:
-        mac_address: 52:54:00:01:83:00
+        mac_address: 52:54:00:01:83:00   # Backend VLAN, slot 0
       infrastructure:
-        mac_address: 52:54:00:01:01:00
+        mac_address: 52:54:00:01:01:00   # Infrastructure VLAN, slot 0
 
 networks:
   backend:
@@ -34,11 +36,16 @@ x-casaos:
   main: samba
   category: Identity
   description:
-    en_US: Active Directory Domain Controller powered by Samba.
+    en_US: Samba AD DC (Coulter Edition) — household Active Directory backbone for Windows-friendly identity.
   icon: ./icon.png
   screenshots:
     - ./screenshot-1.png
   title:
-    en_US: Samba AD DC
+    en_US: Samba AD DC (Coulter Edition)
   tagline:
-    en_US: Windows-friendly household identity backbone.
+    en_US: Household identity backbone powered by Samba.
+  tags:
+    - coulter
+    - household
+    - samba
+    - identity

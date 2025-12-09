@@ -1,4 +1,4 @@
-name: cockpit
+name: cockpit-coulter
 services:
   cockpit:
     image: registry.fedoraproject.org/fedora:latest
@@ -10,13 +10,15 @@ services:
     volumes:
       - /etc:/etc
       - /var:/var
+    env_file:
+      - ./.env
     environment:
       - TZ=${TZ}
     networks:
       backend:
-        mac_address: 52:54:00:01:83:01
+        mac_address: 52:54:00:01:83:01   # Backend VLAN, slot 1
       infrastructure:
-        mac_address: 52:54:00:01:01:01
+        mac_address: 52:54:00:01:01:01   # Infrastructure VLAN, slot 1
 
 networks:
   backend:
@@ -27,13 +29,17 @@ networks:
 x-casaos:
   architectures: [amd64]
   main: cockpit
-  category: Identity
+  category: Infrastructure
   description:
-    en_US: Cockpit web console with Samba module for managing AD DC and shares.
+    en_US: Cockpit web console (Coulter Edition) with Samba module for household AD DC and system management.
   icon: ./icon.png
   screenshots:
     - ./screenshot-1.png
   title:
-    en_US: Cockpit Server Dashboard
+    en_US: Cockpit Server Dashboard (Coulter Edition)
   tagline:
-    en_US: Lightweight web console for Samba and system management.
+    en_US: Household system dashboard with Samba integration.
+  tags:
+    - coulter
+    - household
+    - infrastructure
