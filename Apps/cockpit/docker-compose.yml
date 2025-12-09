@@ -1,0 +1,45 @@
+name: cockpit-coulter
+services:
+  cockpit:
+    image: registry.fedoraproject.org/fedora:latest
+    container_name: cockpit
+    restart: unless-stopped
+    command: ["/usr/sbin/cockpit-ws", "--no-tls"]
+    ports:
+      - "9090:9090"
+    volumes:
+      - /etc:/etc
+      - /var:/var
+    env_file:
+      - ./.env
+    environment:
+      - TZ=${TZ}
+    networks:
+      backend:
+        mac_address: 52:54:00:01:83:01   # Backend VLAN, slot 1
+      infrastructure:
+        mac_address: 52:54:00:01:01:01   # Infrastructure VLAN, slot 1
+
+networks:
+  backend:
+    external: true
+  infrastructure:
+    external: true
+
+x-casaos:
+  architectures: [amd64]
+  main: cockpit
+  category: Infrastructure
+  description:
+    en_US: Cockpit web console (Coulter Edition) with Samba module for household AD DC and system management.
+  icon: ./icon.png
+  screenshots:
+    - ./screenshot-1.png
+  title:
+    en_US: Cockpit Server Dashboard (Coulter Edition)
+  tagline:
+    en_US: Household system dashboard with Samba integration.
+  tags:
+    - coulter
+    - household
+    - infrastructure

@@ -1,0 +1,36 @@
+{
+  "name": "Coulter Household Repo",
+  "description": "Custom apps for household use",
+  "apps": [
+    {
+      "id": "keycloak",
+      "title": "Keycloak",
+      "description": "Open Source Identity and Access Management.",
+      "icon": "Apps/keycloak/icon.png",
+      "filename": "Apps/keycloak/docker-compose.yml",
+      "categories": ["Identity", "Security"],
+      "version": "1.0.0",
+      "maintainer": "Lawrence Household"
+    },
+    {
+      "id": "postgres",
+      "title": "PostgreSQL",
+      "description": "Powerful open source relational database.",
+      "icon": "Apps/postgres/icon.png",
+      "filename": "Apps/postgres/docker-compose.yml",
+      "categories": ["Database"],
+      "version": "15.0",
+      "maintainer": "Lawrence Household"
+    },
+    {
+      "id": "samba-ad-dc",
+      "title": "Samba AD DC",
+      "description": "Active Directory Domain Controller with Samba.",
+      "icon": "Apps/samba-ad-dc/icon.png",
+      "filename": "Apps/samba-ad-dc/docker-compose.yml",
+      "categories": ["Identity", "Networking"],
+      "version": "4.20.0",
+      "maintainer": "Lawrence Household"
+    }
+  ]
+}
