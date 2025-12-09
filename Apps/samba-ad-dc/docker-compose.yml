@@ -1,146 +1,44 @@
 name: samba-ad-dc
 services:
   samba:
-    image: ghcr.io/crazy-max/samba:0.19.0  # specific tag; provides AD DC mode via sssd/winbind options
+    image: ghcr.io/crazy-max/samba:0.19.0
     container_name: samba-ad-dc
     restart: unless-stopped
     environment:
       - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${PGID}
-      # Core AD DC domain settings (edit to fit your household)
       - SAMBA_SERVER_ROLE=ad-dc
       - SAMBA_DOMAIN=HOUSEHOLD
       - SAMBA_REALM=HOUSEHOLD.LAN
       - SAMBA_ADMIN_PASSWORD=ChangeMeNow_42
-      # Networking identity (adjust to your VLAN/IP plan)
       - SAMBA_NETBIOS_NAME=DC1
       - SAMBA_WORKGROUP=HOUSEHOLD
-    ports:
-      # AD DC required ports (TCP/UDP). CasaOS will publish these as given.
-      - target: 53
-        published: 53
-        protocol: tcp
-      - target: 53
-        published: 53
-        protocol: udp
-      - target: 88
-        published: 88
-        protocol: tcp
-      - target: 88
-        published: 88
-        protocol: udp
-      - target: 135
-        published: 135
-        protocol: tcp
-      - target: 137
-        published: 137
-        protocol: udp
-      - target: 138
-        published: 138
-        protocol: udp
-      - target: 139
-        published: 139
-        protocol: tcp
-      - target: 389
-        published: 389
-        protocol: tcp
-      - target: 389
-        published: 389
-        protocol: udp
-      - target: 445
-        published: 445
-        protocol: tcp
-      - target: 445
-        published: 445
-        protocol: udp
-      - target: 464
-        published: 464
-        protocol: tcp
-      - target: 464
-        published: 464
-        protocol: udp
-      - target: 636
-        published: 636
-        protocol: tcp
-      - target: 3268
-        published: 3268
-        protocol: tcp
-      - target: 3269
-        published: 3269
-        protocol: tcp
-      - target: 9389
-        published: 9389
-        protocol: tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/samba-ad-dc/etc
-        target: /etc/samba
-      - type: bind
-        source: /DATA/AppData/samba-ad-dc/data
-        target: /var/lib/samba
-      - type: bind
-        source: /DATA/AppData/samba-ad-dc/state
-        target: /var/cache/samba
-      - type: bind
-        source: /DATA/AppData/samba-ad-dc/log
-        target: /var/log/samba
-    x-casaos:
-      envs:
-        - container: SAMBA_SERVER_ROLE
-          description:
-            en_US: Server role (ad-dc for domain controller).
-        - container: SAMBA_DOMAIN
-          description:
-            en_US: NT domain/workgroup name (e.g., HOUSEHOLD).
-        - container: SAMBA_REALM
-          description:
-            en_US: Kerberos realm (e.g., HOUSEHOLD.LAN).
-        - container: SAMBA_ADMIN_PASSWORD
-          description:
-            en_US: Administrator password used during domain provisioning.
-        - container: SAMBA_NETBIOS_NAME
-          description:
-            en_US: NetBIOS hostname for this DC (e.g., DC1).
-        - container: SAMBA_WORKGROUP
-          description:
-            en_US: Workgroup (usually same as domain).
-      ports:
-        - container: "53/tcp, 53/udp, 88/tcp, 88/udp, 135/tcp, 137/udp, 138/udp, 139/tcp, 389/tcp, 389/udp, 445/tcp, 445/udp, 464/tcp, 464/udp, 636/tcp, 3268/tcp, 3269/tcp, 9389/tcp"
-          description:
-            en_US: Required AD DC ports for DNS, LDAP/Kerberos, SMB/CIFS, and replication.
-      volumes:
-        - container: /etc/samba
-          description:
-            en_US: Samba config directory.
-        - container: /var/lib/samba
-          description:
-            en_US: Samba state/database.
-        - container: /var/cache/samba
-          description:
-            en_US: Samba cache.
-        - container: /var/log/samba
-          description:
-            en_US: Samba logs (persisted for forensic troubleshooting).
+      - /DATA/AppData/samba-ad-dc/etc:/etc/samba
+      - /DATA/AppData/samba-ad-dc/data:/var/lib/samba
+      - /DATA/AppData/samba-ad-dc/state:/var/cache/samba
+      - /DATA/AppData/samba-ad-dc/log:/var/log/samba
+    networks:
+      backend:
+        mac_address: 52:54:00:01:83:00
+      infrastructure:
+        mac_address: 52:54:00:01:01:00
+
+networks:
+  backend:
+    external: true
+  infrastructure:
+    external: true
 
 x-casaos:
-  architectures:
-    - amd64
+  architectures: [amd64]
   main: samba
-  author: Lawrence Household
   category: Identity
   description:
-    en_US: Active Directory Domain Controller powered by Samba, suitable for household identity and Windows-first environments.
-  developer: Samba Team (container by crazy-max)
-  icon: Apps/samba-ad-dc/icon.png
+    en_US: Active Directory Domain Controller powered by Samba.
+  icon: ./icon.png
+  screenshots:
+    - ./screenshot-1.png
   title:
     en_US: Samba AD DC
   tagline:
-    en_US: Windows-friendly household identity with AD, Kerberos, and DNS.
-  tips:
-    before_install:
-      en_US: |
-        This app exposes multiple AD DC ports directly; run behind a trusted LAN/VLAN.
-        Set SAMBA_ADMIN_PASSWORD to a strong value. After provisioning, join clients to the domain.
-  index: /
-  # No WEBUI; AD DC is service-only. Leave port_map empty.
+    en_US: Windows-friendly household identity backbone.
