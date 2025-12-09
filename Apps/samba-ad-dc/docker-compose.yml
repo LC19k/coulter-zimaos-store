@@ -5,20 +5,18 @@ services:
     container_name: samba-ad-dc
     restart: unless-stopped
     environment:
-      - TZ=${TZ}
-      - SAMBA_SERVER_ROLE=${SAMBA_SERVER_ROLE}
-      - SAMBA_DOMAIN=${SAMBA_DOMAIN}
-      - SAMBA_REALM=${SAMBA_REALM}
-      - SAMBA_ADMIN_PASSWORD=${SAMBA_ADMIN_PASSWORD}
-      - SAMBA_NETBIOS_NAME=${SAMBA_NETBIOS_NAME}
-      - SAMBA_WORKGROUP=${SAMBA_WORKGROUP}
+      TZ: America/New_York
+      SAMBA_SERVER_ROLE: ad-dc
+      SAMBA_DOMAIN: HOUSEHOLD
+      SAMBA_REALM: HOUSEHOLD.LAN
+      SAMBA_ADMIN_PASSWORD: SuperSecretPass123   # replace with your actual strong password
+      SAMBA_NETBIOS_NAME: DC1
+      SAMBA_WORKGROUP: HOUSEHOLD
     volumes:
       - /DATA/AppData/samba-ad-dc/etc:/etc/samba
       - /DATA/AppData/samba-ad-dc/data:/var/lib/samba
       - /DATA/AppData/samba-ad-dc/state:/var/cache/samba
       - /DATA/AppData/samba-ad-dc/log:/var/log/samba
-    env_file:
-      - ./.env
     networks:
       backend:
         mac_address: 52:54:00:01:83:00   # Backend VLAN, slot 0
